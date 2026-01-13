@@ -1,0 +1,12 @@
+# Ignore root image files
+*.jpg
+*.png
+*.jpeg
+*.gif
+
+# Ignore temp files
+new-design.css
+
+# Allow theme images
+!99fy/images/
+!99fy/images/*.png
