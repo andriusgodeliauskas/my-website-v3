@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Preview - Final</title>
+
+    <!-- Tailwind & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Base Styles */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #fff !important; /* Page background is now white */
+            color: #111827; /* Default text color dark gray */
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .site-header-clean {
+            position: fixed; top: 0; left: 0; width: 100%;
+            z-index: 9999;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2rem 3rem; background: transparent; border-bottom: 1px solid transparent;
+        }
+        .site-header-clean.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(15, 23, 42, 0.8) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+        .clean-nav-ul { list-style: none; display: flex; gap: 3rem; margin: 0; padding: 0; }
+        .clean-nav-ul li a { 
+            text-decoration: none; font-size: 0.875rem; font-weight: 600; color: #cbd5e1; 
+            transition: color 0.3s ease;
+        }
+        .clean-nav-ul li a:hover { color: #fff; }
+        @media (max-width: 768px) {
+            .site-header-clean { padding: 1.5rem; }
+            .site-header-clean.scrolled { padding: 1rem 1.5rem; }
+        }
+
+        /* Hero Flow Beam Animation */
+        .animated-flow-beam {
+            position: absolute; top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 300px; height: 100%;
+            overflow: hidden; z-index: 0; pointer-events: none;
+        }
+        .animated-flow-beam::before, .animated-flow-beam::after {
+            content: ''; position: absolute; left: 50%; top: 0;
+            width: 500px; height: 150%;
+            transform: translateX(-50%); filter: blur(100px);
+        }
+        .animated-flow-beam::before {
+            background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.5) 0%, rgba(0,0,0,0) 70%);
+            animation: moveGlow 12s ease-in-out infinite;
+        }
+        .animated-flow-beam::after {
+            background: radial-gradient(ellipse at center, rgba(79, 70, 229, 0.5) 0%, rgba(0,0,0,0) 70%);
+            animation: moveGlow 12s ease-in-out infinite -6s;
+        }
+        @keyframes moveGlow {
+            0% { transform: translate(-50%, -120%); opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { transform: translate(-50%, 120%); opacity: 0.8; }
+        }
+
+        /* New 2x2 Product Grid */
+        #work ul.products {
+            display: grid !important;
+            grid-template-columns: repeat(1, 1fr) !important;
+            gap: 2rem !important;
+            margin: 0 auto !important; padding: 0 !important; list-style: none !important;
+        }
+        @media (min-width: 768px) {
+            #work ul.products { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+
+        /* Simplified Dark Product Card Style */
+        #work ul.products li.product {
+            width: 100% !important; margin: 0 !important; float: none !important;
+            background: #111827 !important;
+            border: 1px solid #1f2937 !important;
+            border-radius: 1.5rem !important;
+            overflow: hidden !important; display: flex !important; flex-direction: column !important;
+            transition: all 0.4s ease !important;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05) !important;
+            position: relative; z-index: 1;
+        }
+        #work ul.products li.product::before { display: none; }
+        #work ul.products li.product:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04) !important;
+        }
+        #work ul.products li.product a img {
+            width: 100% !important; height: 350px !important; object-fit: cover !important;
+            margin: 0 !important; padding: 0 !important; border-radius: 0 !important;
+            display: block !important; opacity: 0.9; transition: opacity 0.3s ease;
+        }
+        #work ul.products li.product:hover a img { opacity: 1; }
+        #work ul.products li.product .woocommerce-loop-product__title {
+            font-size: 1.25rem !important; font-weight: 700 !important; color: #f1f5f9 !important;
+            padding: 1.5rem 1.5rem 0.5rem 1.5rem !important; margin: 0 !important; line-height: 1.2 !important;
+        }
+        #work ul.products li.product .price {
+            padding: 0 1.5rem 1.5rem 1.5rem !important; margin: 0 !important; color: #a78bfa !important;
+            font-weight: 600 !important; font-size: 1rem !important; display: block !important;
+        }
+
+        /* CTA Button Shine Effect */
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+        .cta-button:hover::after {
+            transform: scale(1);
+        }
+
+        /* Expertise & Contact Section Animation */
+        .expertise-card, .contact-form {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="page-template-page-landing">
+
+<div id="page" class="site">
+
+    <!-- HEADER -->
+    <header id="masthead" class="site-header-clean flex justify-between items-center px-6 lg:px-12">
+        <div class="flex items-center gap-10">
+            <a href="#" class="text-3xl font-black tracking-tighter text-white group">
+                AG<span class="text-purple-400 group-hover:animate-pulse">.</span>
+            </a>
+            <nav class="hidden md:flex items-center">
+                <ul class="clean-nav-ul">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <main class="relative min-h-screen flex items-center px-6 lg:px-24 overflow-hidden" style="background-color: #000;">
+        <div class="animated-flow-beam"></div>
+        <div class="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 text-left">
+                <div class="space-y-4">
+                    <h2 class="text-sm tracking-[0.4em] text-purple-400 uppercase font-black">Good ideas for everyone</h2>
+                    <h1 class="text-8xl lg:text-9xl font-black tracking-tighter text-white leading-none">ANDRIUS G</h1>
+                </div>
+                <div class="w-32 h-1.5 bg-purple-500 rounded-full shadow-lg"></div>
+                <div class="space-y-4 text-slate-300 pt-4">
+                    <p class="text-2xl italic">"Hi, I'm Andrius."</p>
+                    <p class="text-lg font-medium max-w-md">Tech enthusiast creating IT solutions for children's education and development.</p>
+                </div>
+                <div class="pt-8">
+                    <a href="#work" class="cta-button inline-block px-12 py-5 bg-purple-600 text-white font-black rounded-2xl hover:bg-purple-700 transition-all shadow-2xl uppercase tracking-widest text-xs">View My Work</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- PROJECTS -->
+    <section id="work" class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="text-5xl font-black text-gray-900 mb-6 tracking-tight uppercase italic">Selected Projects</h2>
+                <div class="w-20 h-1.5 bg-purple-500 mx-auto rounded-full"></div>
+            </div>
+            <ul class="products">
+                <li class="product">
+                    <a href="#"><img src="https://via.placeholder.com/1600x800/111827/ffffff?text=Full-Width+Project" alt="Project One"></a>
+                    <h2 class="woocommerce-loop-product__title">Full-Width Project Example</h2>
+                    <span class="price"><bdi>€2,500.00</bdi></span>
+                </li>
+                <li class="product">
+                    <a href="#"><img src="https://via.placeholder.com/800x800/111827/ffffff?text=Project+Two" alt="Project Two"></a>
+                    <h2 class="woocommerce-loop-product__title">Project Two</h2>
+                    <span class="price"><bdi>€950.00</bdi></span>
+                </li>
+                <li class="product">
+                    <a href="#"><img src="https://via.placeholder.com/800x800/111827/ffffff?text=Project+Three" alt="Project Three"></a>
+                    <h2 class="woocommerce-loop-product__title">Project Three</h2>
+                    <span class="price"><bdi>€1,100.00</bdi></span>
+                </li>
+                 <li class="product">
+                    <a href="#"><img src="https://via.placeholder.com/1600x800/111827/ffffff?text=Another+Full-Width+Project" alt="Project Four"></a>
+                    <h2 class="woocommerce-loop-product__title">Another Full-Width Project</h2>
+                    <span class="price"><bdi>€3,200.00</bdi></span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- EXPERTISE SECTION -->
+    <section id="expertise" class="py-32 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="text-5xl font-black text-gray-900 mb-6 tracking-tight uppercase italic">My Expertise</h2>
+                <div class="w-20 h-1.5 bg-purple-500 mx-auto rounded-full"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="expertise-card bg-white p-10 rounded-2xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Web Development</h3>
+                    <p class="text-gray-600">Creating modern and responsive websites using the latest technologies.</p>
+                </div>
+                <div class="expertise-card bg-white p-10 rounded-2xl shadow-lg" style="animation-delay: 0.2s;">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">WordPress</h3>
+                    <p class="text-gray-600">Custom WordPress theme and plugin development for any need.</p>
+                </div>
+                <div class="expertise-card bg-white p-10 rounded-2xl shadow-lg" style="animation-delay: 0.4s;">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">WooCommerce</h3>
+                    <p class="text-gray-600">E-commerce solutions with WooCommerce, from simple shops to complex systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-32 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="text-5xl font-black text-gray-900 mb-6 tracking-tight uppercase italic">Get In Touch</h2>
+                <div class="w-20 h-1.5 bg-purple-500 mx-auto rounded-full"></div>
+            </div>
+            <div class="max-w-3xl mx-auto contact-form">
+                <form class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <input type="text" placeholder="Your Name" class="w-full p-4 rounded-lg bg-gray-100 border-2 border-transparent focus:border-purple-500 focus:outline-none transition-colors">
+                        <input type="email" placeholder="Your Email" class="w-full p-4 rounded-lg bg-gray-100 border-2 border-transparent focus:border-purple-500 focus:outline-none transition-colors">
+                    </div>
+                    <textarea placeholder="Your Message" rows="6" class="w-full p-4 rounded-lg bg-gray-100 border-2 border-transparent focus:border-purple-500 focus:outline-none transition-colors"></textarea>
+                    <div class="text-center">
+                        <button type="submit" class="cta-button inline-block px-12 py-5 bg-purple-600 text-white font-black rounded-2xl hover:bg-purple-700 transition-all shadow-2xl uppercase tracking-widest text-xs">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('masthead');
+        if (window.scrollY > 50) { header.classList.add('scrolled'); } 
+        else { header.classList.remove('scrolled'); }
+    });
+</script>
+
+</body>
+</html>

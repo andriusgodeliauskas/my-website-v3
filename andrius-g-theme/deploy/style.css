@@ -1,0 +1,897 @@
+/*
+Theme Name: Andrius G Theme
+Theme URI: https://godeliauskas.com
+Author: Andrius G
+Author URI: https://godeliauskas.com
+Description: Modern, minimalist portfolio theme tailored for Andrius G. Features a full-width landing page, showcase-style projects, and clean typography.
+Version: 1.1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: andrius-g-theme
+Tags: portfolio, business, clean, minimalist, woocommerce
+*/
+
+body {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* Hide scrollbar when menu is open */
+.overflow-hidden-mobile {
+    overflow: hidden;
+}
+
+/* ===== DESKTOP MENU STYLES ===== */
+nav ul.menu li {
+    display: inline-block;
+    list-style: none;
+}
+
+nav ul.menu li a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav ul.menu li a:hover {
+    color: rgb(34, 211, 238);
+    /* cyan-400 */
+}
+
+nav ul.menu li.current-menu-item a,
+nav ul.menu li.current_page_item a {
+    color: rgb(34, 211, 238);
+    /* cyan-400 */
+}
+
+
+/* ===== HULY.IO STYLE WIDE BEAM EFFECT ===== */
+.hero-beam-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Main wide light source from top - the big dramatic glow */
+.beam-core {
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120vw;
+    height: 100%;
+    background:
+        radial-gradient(ellipse 30% 50% at 50% 0%, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+        radial-gradient(ellipse 50% 60% at 50% 5%, rgba(180, 220, 255, 0.4) 0%, transparent 100%),
+        radial-gradient(ellipse 70% 70% at 50% 10%, rgba(0, 180, 255, 0.3) 0%, transparent 100%);
+    animation: beamPulse 4s ease-in-out infinite;
+}
+
+/* Wide spreading glow - cyan/blue tones */
+.beam-glow {
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200vw;
+    height: 120%;
+    background: radial-gradient(ellipse 55% 55% at 50% 0%,
+            rgba(0, 200, 255, 0.25) 0%,
+            rgba(0, 150, 220, 0.15) 20%,
+            rgba(0, 100, 180, 0.08) 40%,
+            transparent 70%);
+    filter: blur(30px);
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* Ambient wide spread */
+.beam-ambient {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250vw;
+    height: 140%;
+    background: radial-gradient(ellipse 65% 50% at 50% 0%,
+            rgba(0, 180, 255, 0.12) 0%,
+            rgba(0, 120, 200, 0.06) 25%,
+            rgba(0, 80, 150, 0.03) 45%,
+            transparent 70%);
+    filter: blur(40px);
+}
+
+/* Bright white center flare */
+.beam-flare {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1200px;
+    height: 800px;
+    background: radial-gradient(ellipse 45% 65% at 50% 0%,
+            rgba(255, 255, 255, 0.4) 0%,
+            rgba(255, 255, 255, 0.2) 15%,
+            rgba(200, 240, 255, 0.1) 30%,
+            transparent 55%);
+    filter: blur(15px);
+}
+
+/* Wide blurred beam line in center */
+.beam-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 85%;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.6) 0%,
+            rgba(255, 255, 255, 0.4) 15%,
+            rgba(200, 240, 255, 0.25) 35%,
+            rgba(0, 180, 255, 0.12) 55%,
+            rgba(0, 150, 255, 0.05) 75%,
+            transparent 100%);
+    filter: blur(10px);
+}
+
+/* Extra bright center core */
+.beam-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.85) 0%,
+            rgba(255, 255, 255, 0.5) 20%,
+            rgba(255, 255, 255, 0.2) 50%,
+            transparent 100%);
+    filter: blur(2px);
+}
+
+/* Orange/warm accent glow (like huly has warm tones) */
+.beam-warm {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150vw;
+    height: 90%;
+    background: radial-gradient(ellipse 50% 45% at 50% 25%,
+            rgba(255, 150, 50, 0.1) 0%,
+            rgba(255, 100, 50, 0.05) 30%,
+            transparent 60%);
+    filter: blur(50px);
+}
+
+/* Flowing particles */
+.beam-particles {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 100%;
+}
+
+.beam-particles::before,
+.beam-particles::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 4px;
+    height: 120px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(200, 180, 255, 0.5), transparent);
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: particleFlow 3s linear infinite;
+}
+
+.beam-particles::after {
+    animation-delay: -1.5s;
+    width: 3px;
+    height: 80px;
+    left: calc(50% + 20px);
+    opacity: 0.6;
+}
+
+.beam-particles-2 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 100%;
+}
+
+.beam-particles-2::before,
+.beam-particles-2::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(123, 97, 255, 0.4), transparent);
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: particleFlow 3.5s linear infinite -0.8s;
+}
+
+.beam-particles-2::before {
+    left: calc(50% - 25px);
+}
+
+.beam-particles-2::after {
+    left: calc(50% + 30px);
+    animation-delay: -2s;
+    height: 70px;
+    opacity: 0.5;
+}
+
+@keyframes beamPulse {
+
+    0%,
+    100% {
+        opacity: 0.9;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: 0.85;
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+@keyframes particleFlow {
+    0% {
+        transform: translateX(-50%) translateY(-150px);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Dark hero navigation styles */
+.nav-dark .nav-logo {
+    color: #fff !important;
+}
+
+.nav-dark .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.nav-dark .nav-link:hover {
+    color: #a78bfa !important;
+}
+
+.nav-dark .mobile-menu-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+}
+
+/* ===== ANIMATED GLOW BUTTON ===== */
+.glow-button-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.glow-button {
+    position: relative;
+    display: inline-block;
+    padding: 1.1rem 2.8rem;
+    background: linear-gradient(145deg, #fafaf9 0%, #e7e5e4 100%);
+    color: #57534e;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    border: 2px solid rgba(255, 180, 120, 0.3);
+    cursor: pointer;
+    overflow: visible;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(255, 200, 150, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.glow-button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(145deg, #ffffff 0%, #f5f3f0 100%);
+    border-color: rgba(255, 180, 120, 0.6);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        0 0 80px rgba(255, 200, 150, 0.45),
+        0 0 100px rgba(123, 97, 255, 0.35),
+        0 0 120px rgba(0, 180, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Ambient glow behind button */
+.glow-button::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 9999px;
+    background: radial-gradient(ellipse at center,
+            rgba(255, 200, 150, 0.2) 0%,
+            rgba(123, 97, 255, 0.1) 40%,
+            transparent 70%);
+    filter: blur(15px);
+    z-index: -1;
+    opacity: 0.8;
+    animation: glowPulseBtn 2s ease-in-out infinite;
+}
+
+/* Shimmer effect - disabled */
+.glow-button-shimmer {
+    display: none;
+}
+
+@keyframes glowPulseBtn {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* ===== ANIMATED BORDER BEAM EFFECT FOR PROJECT CARDS ===== */
+.project-card {
+    position: relative;
+    background: #1a1a2e;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(from var(--card-angle, 0deg),
+            transparent 0%,
+            transparent 70%,
+            rgba(255, 150, 50, 0.8) 85%,
+            rgba(255, 200, 100, 1) 90%,
+            rgba(255, 150, 50, 0.8) 95%,
+            transparent 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rotateBorderCard 4s linear infinite;
+    z-index: 1;
+}
+
+/* Inner content container to ensure content stays above the border effect */
+.project-card-inner {
+    position: relative;
+    z-index: 2;
+    background: #1a1a2e;
+    border-radius: calc(1.5rem - 2px);
+    overflow: hidden;
+    height: 100%;
+}
+
+@property --card-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotateBorderCard {
+    0% {
+        --card-angle: 0deg;
+    }
+
+    100% {
+        --card-angle: 360deg;
+    }
+}
+
+/* ===== ANIMATED CONTACT BLOCK ===== */
+.contact-container {
+    position: relative;
+    background: linear-gradient(to br, #0f172a 0%, #1a2847 50%, #0f172a 100%);
+    border-radius: 3rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Animated rotating border effect */
+.contact-container::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 3rem;
+    padding: 2px;
+    background: conic-gradient(from var(--contact-angle, 0deg),
+            transparent 0%,
+            transparent 60%,
+            rgba(255, 150, 50, 0.6) 75%,
+            rgba(255, 200, 100, 0.9) 80%,
+            rgba(255, 150, 50, 0.6) 85%,
+            transparent 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rotateBorderContact 8s linear infinite;
+    z-index: 1;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Pulsing glow effect */
+.contact-container::after {
+    content: '';
+    position: absolute;
+    inset: -40px;
+    border-radius: 3rem;
+    background: radial-gradient(ellipse at center,
+            rgba(255, 150, 50, 0.15) 0%,
+            rgba(0, 180, 255, 0.08) 30%,
+            transparent 70%);
+    filter: blur(20px);
+    z-index: 0;
+    opacity: 0.7;
+    animation: pulseContactGlow 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Inner wrapper to ensure content stays above effects */
+.contact-inner {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(to br, #0f172a 0%, #1a2847 50%, #0f172a 100%);
+    border-radius: calc(3rem - 2px);
+    overflow: hidden;
+}
+
+/* Contact link styles with enhanced hover */
+.contact-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.contact-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 150, 50, 0.8), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+}
+
+.contact-link:hover::before {
+    transform: translateX(100%);
+}
+
+/* Icon container with animation */
+.contact-icon {
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.15), rgba(255, 150, 50, 0.1));
+    border: 1px solid rgba(0, 180, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.contact-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: conic-gradient(from var(--icon-angle, 0deg),
+            transparent 0%,
+            rgba(255, 150, 50, 0.4) 50%,
+            transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: rotateIcon 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.contact-link:hover .contact-icon {
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.3), rgba(255, 150, 50, 0.2));
+    border-color: rgba(0, 180, 255, 0.6);
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 20px rgba(0, 180, 255, 0.3), 0 0 40px rgba(255, 150, 50, 0.15);
+}
+
+.contact-link:hover .contact-icon::before {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+.contact-icon svg {
+    position: relative;
+    z-index: 2;
+    color: rgb(0, 180, 255);
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 4px rgba(0, 180, 255, 0.3));
+}
+
+.contact-link:hover .contact-icon svg {
+    color: rgb(255, 200, 150);
+    filter: drop-shadow(0 0 8px rgba(255, 150, 50, 0.6));
+    transform: scale(1.1);
+}
+
+/* Contact text styling */
+.contact-text {
+    transition: all 0.3s ease;
+    color: rgba(226, 232, 240, 0.8);
+}
+
+.contact-link:hover .contact-text {
+    color: rgb(255, 200, 150);
+    text-shadow: 0 0 10px rgba(255, 150, 50, 0.4);
+}
+
+/* Right side decoration with animated gradient */
+.contact-decoration {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 150, 50, 0.12), rgba(0, 180, 255, 0.08));
+    border-left: 2px solid rgba(0, 180, 255, 0.2);
+    overflow: hidden;
+}
+
+.contact-decoration::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%);
+    animation: slideGradient 3s ease-in-out infinite;
+}
+
+.contact-icon-large {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 9999px;
+    background: conic-gradient(from var(--large-icon-angle, 0deg),
+            transparent 0%,
+            transparent 40%,
+            rgba(0, 180, 255, 0.3) 50%,
+            rgba(255, 150, 50, 0.2) 60%,
+            transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border: 2px solid rgba(0, 180, 255, 0.2);
+    animation: rotateLargeIcon 6s linear infinite;
+    box-shadow: 0 0 40px rgba(0, 180, 255, 0.1), 0 0 20px rgba(255, 150, 50, 0.05);
+}
+
+.contact-icon-large svg {
+    color: rgb(0, 180, 255);
+    filter: drop-shadow(0 0 8px rgba(0, 180, 255, 0.4));
+    position: relative;
+    z-index: 2;
+}
+
+/* Animation keyframes */
+@property --contact-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --icon-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --large-icon-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotateBorderContact {
+    0% {
+        --contact-angle: 0deg;
+    }
+
+    100% {
+        --contact-angle: 360deg;
+    }
+}
+
+@keyframes pulseContactGlow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+}
+
+@keyframes slideGradient {
+
+    0%,
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+}
+
+/* ===== EXPERTISE CARD ANIMATIONS ===== */
+.expertise-card {
+    position: relative;
+    background: #1e293b;
+    border-radius: 2.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    perspective: 1000px;
+}
+
+/* Animated rotating border for expertise cards */
+.expertise-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(from var(--expertise-angle, 0deg),
+            transparent 0%,
+            transparent 70%,
+            rgba(255, 150, 50, 0.6) 80%,
+            rgba(255, 200, 100, 0.9) 90%,
+            rgba(255, 150, 50, 0.6) 95%,
+            transparent 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rotateExpertiseBorder 4s linear infinite;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Show border on hover */
+.expertise-card:hover::before {
+    opacity: 1;
+}
+
+/* Inner content container */
+.expertise-card-inner {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: calc(2.5rem - 2px);
+    overflow: hidden;
+    height: 100%;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+/* Icon styling and animation */
+.expertise-icon {
+    width: 4rem;
+    height: 4rem;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);
+    border: 1.5px solid rgba(6, 182, 212, 0.3);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: #06b6d4;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    flex-shrink: 0;
+}
+
+/* Icon hover animation - 3D flip */
+.expertise-card:hover .expertise-icon {
+    transform: scale(1.15) rotateY(180deg);
+    background: linear-gradient(135deg, rgba(255, 150, 50, 0.3) 0%, rgba(255, 200, 100, 0.2) 100%);
+    border-color: rgba(255, 150, 50, 0.5);
+    color: #ffa500;
+    box-shadow: 0 0 20px rgba(255, 150, 50, 0.4), inset 0 0 10px rgba(255, 150, 50, 0.2);
+    transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Card lift effect on hover */
+.expertise-card:hover .expertise-card-inner {
+    transform: translateY(-12px);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(255, 150, 50, 0.2),
+        0 0 60px rgba(255, 150, 50, 0.1);
+}
+
+/* Smooth glow effect */
+.expertise-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 150, 50, 0.05) 0%, transparent 100%);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.expertise-card:hover::after {
+    opacity: 1;
+}
+
+/* Fade-in animation for expertise cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.expertise-card {
+    animation: fadeInUp 1.2s ease-out both;
+}
+
+/* Staggered animation for each card */
+.expertise-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.expertise-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.expertise-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+/* Rotating border animation */
+@keyframes rotateExpertiseBorder {
+    0% {
+        --expertise-angle: 0deg;
+    }
+
+    100% {
+        --expertise-angle: 360deg;
+    }
+}
+
+@property --expertise-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* Expertise section title animation */
+.expertise-section-title {
+    animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Divider line animation */
+.expertise-divider {
+    animation: scaleInWidth 0.8s ease-out 0.3s both;
+}
+
+@keyframes scaleInWidth {
+    from {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+/* Pulse effect on cards - subtle infinite */
+@keyframes subtlePulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(255, 150, 50, 0.1), 0 0 40px rgba(255, 150, 50, 0.05);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(255, 150, 50, 0.15), 0 0 60px rgba(255, 150, 50, 0.08);
+    }
+}
+
+.expertise-card:hover {
+    /* animation: subtlePulse 2s ease-in-out infinite; */
+    /* Removed as per user feedback */
+}
