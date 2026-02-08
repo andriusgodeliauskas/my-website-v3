@@ -1,12 +1,13 @@
-# Ignore root image files
-*.jpg
-*.png
-*.jpeg
-*.gif
+# ZIP archives
+*.zip
 
-# Ignore temp files
+# WordPress config (security)
+wp-config.php
+
+# Temp files
 new-design.css
 
-# Allow theme images
-!99fy/images/
-!99fy/images/*.png
+# IDE / system
+.claude/
+.DS_Store
+Thumbs.db
